@@ -45,3 +45,19 @@ Repository này dùng để lưu trữ toàn bộ mã nguồn các bài tập th
 ### Câu 4: Thực hiện cơ chế tính điểm và restart trò chơi
 * **Ý tưởng:** Xây dựng cơ chế để theo dõi điểm số, phát hiện va chạm dẫn đến kết thúc trò chơi (Game Over) và cho phép người chơi khởi động lại màn chơi mới nhanh chóng.
 * **Cách thực hiện:** Sử dụng đối tượng Rectangle để tạo các hộp khung va chạm vô hình bao quanh nhân vật chim và ống nước. Nếu các khung này giao cắt nhau hoặc chim rơi chạm tọa độ đáy màn hình, cờ trạng thái gameOver sẽ được bật sáng. Nếu chim bay vượt qua thành công tọa độ X của một ống nước, điểm số sẽ được cộng thêm 1. Tại màn hình Game Over, nếu nhận được tín hiệu nhấn phím từ người chơi, hệ thống sẽ làm sạch toàn bộ mảng chướng ngại vật, đưa điểm số và tọa độ chim về vạch xuất phát để bắt đầu một lượt chơi mới.
+
+## LAB 3
+
+### Thiết kế website bán sản phẩm bằng Java Swing
+
+**Yêu cầu 1: Thiết kế bố cục giao diện (8 điểm)**
+* **Ý tưởng:** Ứng dụng Java Swing để thiết kế phần mềm Desktop mang phong cách trực quan, hiện đại giống một trang web thương mại điện tử (E-commerce UI). Giao diện được chia làm hai khu vực chính: danh sách sản phẩm dạng lưới có thể cuộn ở bên phải, và khu vực xem chi tiết sản phẩm được chọn với ảnh lớn ở bên trái.
+* **Cách thực hiện:** Áp dụng tư duy lập trình hướng đối tượng (OOP), tạo class `Product` riêng biệt để lưu trữ dữ liệu. Sử dụng trình quản lý `BorderLayout` cho khung cửa sổ chính. Vùng bên phải (danh sách) sử dụng `GridLayout(0, 4)` đặt bên trong `JScrollPane` (được cấu hình ẩn thanh cuộn ngang, ép hiển thị thanh cuộn dọc) để chứa các thẻ (card) sản phẩm. Vùng bên trái dùng `BoxLayout` xếp dọc để hiển thị chi tiết sản phẩm. Các thẻ sản phẩm được làm đẹp bằng cách kết hợp `EmptyBorder` và `LineBorder` bo góc.
+
+**Yêu cầu 2: Thêm tính năng click chọn sản phẩm (1 điểm)**
+* **Ý tưởng:** Khi người dùng tương tác với bất kỳ thẻ sản phẩm nào ở danh sách bên phải, thông tin của sản phẩm đó phải lập tức được ánh xạ và cập nhật sang khu vực hiển thị chính ở bên trái.
+* **Cách thực hiện:** Đăng ký sự kiện `MouseListener` (thông qua lớp `MouseAdapter`) trên mỗi `JPanel` đại diện cho thẻ sản phẩm. Khi bắt được sự kiện `mouseClicked`, hệ thống sẽ gọi hàm cập nhật (`updateLeftPanel`), truyền đối tượng `Product` tương ứng vào để thay đổi đồng loạt nội dung của các `JLabel` bên trái (Tên, giá, thương hiệu, mô tả, hình ảnh). Đồng thời, bổ sung thêm hiệu ứng đổi màu nền thẻ khi lướt chuột qua (`mouseEntered` / `mouseExited`).
+
+**Yêu cầu 3: Thêm hiệu ứng thay đổi sản phẩm (1 điểm)**
+* **Ý tưởng:** Để thao tác trải nghiệm mềm mại và sát với các website thực tế hơn, hình ảnh hiển thị ở khu vực bên trái không thay đổi một cách đột ngột mà sẽ có hiệu ứng mờ dần rồi rõ nét lên (Fade-in).
+* **Cách thực hiện:** Xây dựng một class tùy chỉnh `ImageLabel` kế thừa trực tiếp từ `JLabel`. Ghi đè phương thức vẽ đồ họa `paintComponent` và sử dụng `AlphaComposite` để can thiệp vào độ trong suốt của ảnh. Thiết lập một bộ đếm `javax.swing.Timer` chạy lặp mỗi 20ms. Mỗi khi click chọn sản phẩm mới, `Timer` sẽ kích hoạt để tăng dần biến độ mờ (alpha) từ 0 đến 1, qua đó tạo ra hiệu ứng chuyển đổi hình ảnh mượt mà.
