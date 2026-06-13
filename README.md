@@ -145,7 +145,7 @@ CREATE TABLE IF NOT EXISTS products (
 ## Cấu trúc thư mục
 
 ```text
-Buoi3/
+Buoi4/
 ├── src/
 │   ├── ShopGUI.java
 │   ├── Product.java
@@ -206,7 +206,7 @@ Cập nhật thông tin sản phẩm ở khu vực bên trái
 
 ## Cách chạy chương trình
 
-Mở PowerShell hoặc Command Prompt tại thư mục `Buoi3/src`, sau đó chạy các lệnh sau:
+Mở PowerShell hoặc Command Prompt tại thư mục `Buoi4/src`, sau đó chạy các lệnh sau:
 
 ```powershell
 javac -cp ".;../lib/*" *.java
